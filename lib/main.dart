@@ -1,5 +1,8 @@
+import 'package:beentogether/home2.dart';
+import 'package:beentogether/todo_memory.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'home.dart';
 class MyApp extends StatelessWidget{
@@ -12,7 +15,13 @@ class MyApp extends StatelessWidget{
     }
 }
 void main (){
-  runApp(MyApp());
+  runApp(
+      ChangeNotifierProvider<TodoMemory>(
+        create: (context){
+          return TodoMemory();
+         }, child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          home: MyApp()),),);
 }
 
 class ViewPage extends StatefulWidget{
@@ -30,7 +39,7 @@ class _ViewPage extends State<ViewPage>{
       controller: controller,
       children:[
         Home(),
-        Image.asset("assert/chibi.png"),
+        Home2(),
         Home(),
       ],
     );
