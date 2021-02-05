@@ -1,4 +1,5 @@
 
+import 'package:beentogether/add_image.dart';
 import 'package:beentogether/memory.dart';
 import 'package:beentogether/todo_memory.dart';
 import 'package:flutter/material.dart';
@@ -55,9 +56,14 @@ class _AddMemory extends State<AddMemory>{
           ),
           Padding(
             padding: EdgeInsets.fromLTRB(20, 10, 0, 0),
-            child: Text(
-              "Chon anh:", style: TextStyle( fontSize: 20, color: Colors.black87),
-            ),
+            child: Row(
+              children: [
+                Text(
+                  "Chon anh:", style: TextStyle( fontSize: 20, color: Colors.black87),
+                ),
+                AddImage(),
+              ],
+            )
           ),
           Padding(
             padding: EdgeInsets.fromLTRB(30, 10, 0, 0),
