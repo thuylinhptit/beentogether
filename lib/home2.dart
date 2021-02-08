@@ -16,11 +16,16 @@ String format = DateFormat('dd/MM/yyyy').format(time);
 class _Home2 extends State<Home2>{
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Stack(
+    return Stack(
         children: [
           Scaffold(
             body: Container(
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage('assert/chibi.png'),
+                      fit: BoxFit.cover
+                  )
+              ),
               child: Consumer<TodoMemory>(
                 builder: (context, model, _){
                   return ListMemory(listMemory: model.memorylist,);
@@ -38,7 +43,7 @@ class _Home2 extends State<Home2>{
           ),
 
         ],
-      ),
+
     );
   }
 

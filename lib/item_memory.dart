@@ -1,3 +1,5 @@
+
+
 import 'package:beentogether/memory.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -10,8 +12,14 @@ class ItemMemory extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return Container(
+      decoration: BoxDecoration(
+        border: Border.all(width: 3.0, color: Colors.pinkAccent),
+        borderRadius:
+        const BorderRadius.all(const Radius.circular(30.0)),
+      ),
+      margin: EdgeInsets.all(10.0),
       padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-      color: Colors.white,
+  //    color: Colors.white,
         child: Column(
           children: [
             Row(
@@ -25,7 +33,7 @@ class ItemMemory extends StatelessWidget{
                   child: Row(
                     children: [
                       Container(
-                        child: Image.asset('assert/ttdo.png', height: 130 ,width: 130,),
+                        child: memory.image
                       ),
                       Column(
                         children: [

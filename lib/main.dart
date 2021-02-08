@@ -1,4 +1,6 @@
+import 'package:beentogether/hom3_mat_khau.dart';
 import 'package:beentogether/home2.dart';
+import 'package:beentogether/home4_chat.dart';
 import 'package:beentogether/todo_memory.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -40,7 +42,7 @@ class _ViewPage extends State<ViewPage>{
       children:[
         Home(),
         Home2(),
-        Home(),
+        Home4(),
       ],
     );
   }

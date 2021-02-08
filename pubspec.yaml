@@ -26,6 +26,7 @@ dependencies:
   provider: ^4.3.3
   intl: ^0.16.1
   image_picker: ^0.6.7+22
+  circular_profile_avatar: ^1.0.6
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -55,6 +56,7 @@ flutter:
      - assert/trang.png
      - assert/ttdo.png
      - assert/doc.png
+     - assert/chibi2.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
