@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -18,6 +17,10 @@ class _Home extends State<Home> {
   String dongDuoi;
   DateTime timeStart;
   TextEditingController _textEditingController = TextEditingController();
+  int day;
+  int days;
+  int month;
+  int week, year;
 
   pickImage( ImageSource source ){
     setState(() {
@@ -80,8 +83,15 @@ class _Home extends State<Home> {
   @override
   void initState() {
     timeStart = DateTime.now();
+    week = 0; month = 0; year = 0;
+    days = (-1*(DateTime.now()).difference(timeStart).inDays).toInt();
+    if( days < 7 ) day = days;
+    else if( days >= 7  ) week = (days/7) as int;
+    else if( days >= 4*7 ) month = (week/4) as int;
+    else if( days >= 12*4*7 ) year = (month/12) as int;
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -126,7 +136,7 @@ class _Home extends State<Home> {
                           padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
                           child: Center(
                             child: Text(
-                              "400", style: TextStyle(decoration: TextDecoration
+                              (days).toString(), style: TextStyle(decoration: TextDecoration
                                 .none, color: Colors.white, fontSize: 90),
                             ),
                           ),
@@ -219,7 +229,7 @@ class _Home extends State<Home> {
                             Container(
                               padding: EdgeInsets.fromLTRB(40, 105, 0, 0),
                               child: Text(
-                                "0", style: TextStyle(fontSize: 30,
+                                year.toString(), style: TextStyle(fontSize: 30,
                                   color: Colors.white,
                                   decoration: TextDecoration.none),
                               ),
@@ -248,7 +258,7 @@ class _Home extends State<Home> {
                             Container(
                               padding: EdgeInsets.fromLTRB(20, 105, 0, 0),
                               child: Text(
-                                "0", style: TextStyle(fontSize: 30,
+                                month.toString(), style: TextStyle(fontSize: 30,
                                   color: Colors.white,
                                   decoration: TextDecoration.none),
                               ),
@@ -277,7 +287,7 @@ class _Home extends State<Home> {
                             Container(
                               padding: EdgeInsets.fromLTRB(20, 105, 0, 0),
                               child: Text(
-                                "0", style: TextStyle(fontSize: 30,
+                                week.toString(), style: TextStyle(fontSize: 30,
                                   color: Colors.white,
                                   decoration: TextDecoration.none),
                               ),
@@ -306,7 +316,7 @@ class _Home extends State<Home> {
                             Container(
                               padding: EdgeInsets.fromLTRB(20, 105, 0, 0),
                               child: Text(
-                                "0", style: TextStyle(fontSize: 30,
+                                day.toString(), style: TextStyle(fontSize: 30,
                                   color: Colors.white,
                                   decoration: TextDecoration.none),
                               ),
@@ -335,7 +345,7 @@ class _Home extends State<Home> {
                             Container(
                               padding: EdgeInsets.fromLTRB(20, 105, 0, 0),
                               child: Text(
-                                "0", style: TextStyle(fontSize: 30,
+                                DateTime.now().hour.toString(), style: TextStyle(fontSize: 30,
                                   color: Colors.white,
                                   decoration: TextDecoration.none),
                               ),
@@ -364,7 +374,7 @@ class _Home extends State<Home> {
                             Container(
                               padding: EdgeInsets.fromLTRB(20, 105, 0, 0),
                               child: Text(
-                                "0", style: TextStyle(fontSize: 30,
+                                DateTime.now().minute.toString(), style: TextStyle(fontSize: 30,
                                   color: Colors.white,
                                   decoration: TextDecoration.none),
                               ),
@@ -713,6 +723,11 @@ class _Home extends State<Home> {
     if( timeStart != null ){
       setState(() {
         timeStart = time;
+        days = (-1*(DateTime.now()).difference(timeStart).inDays + 2).toInt();
+        if( days < 7 ) day = days;
+        else if( days > 7  ) week = (days/7) as int;
+        else if( days >= 4*7 ) month = (week/4) as int;
+        else if( days >= 12*4*7 ) year = (month/12) as int;
       });
     }
   }

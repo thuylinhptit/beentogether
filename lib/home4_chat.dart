@@ -54,6 +54,11 @@ class _Home4 extends State<Home4>{
           ),
         ],
       ),
+      body: Container(
+        child: SizedBox(
+          width: 50,
+        ),
+      ),
     );
   }
 
