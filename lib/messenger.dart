@@ -20,7 +20,7 @@ class Messenger extends StatelessWidget{
                   constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width * .6),
                   padding: EdgeInsets.all(12.0),
                   decoration:
-                  BoxDecoration( color:  Colors.blue,
+                  BoxDecoration( color:  Colors.pinkAccent,
                       shape: BoxShape.rectangle,
                       borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(18),
