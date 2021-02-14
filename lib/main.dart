@@ -1,3 +1,4 @@
+import 'package:beentogether/Home0.dart';
 import 'package:beentogether/hom3_mat_khau.dart';
 import 'package:beentogether/home2.dart';
 import 'package:beentogether/home4_chat.dart';
@@ -12,7 +13,7 @@ class MyApp extends StatelessWidget{
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: ViewPage()
+      home: Home0()
       );
     }
 }
@@ -26,25 +27,3 @@ void main (){
           home: MyApp()),),);
 }
 
-class ViewPage extends StatefulWidget{
-  @override
-  _ViewPage createState() => _ViewPage();
-
-}
-
-class _ViewPage extends State<ViewPage>{
-  PageController controller = PageController();
-  @override
-  Widget build(BuildContext context) {
-    return PageView(
-      scrollDirection: Axis.horizontal,
-      controller: controller,
-      children:[
-        Home(),
-        Home2(),
-        Home4(),
-      ],
-    );
-  }
-
-}
