@@ -1,13 +1,15 @@
 
 
-import 'package:beentogether/memory.dart';
+import 'dart:io';
+
+import 'file:///D:/CODE/Flutter/beentogether/lib/model/memory.dart';
+import 'package:beentogether/ultis/Application.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ItemMemory extends StatelessWidget{
-  Memory memory;
-  int idex;
-  ItemMemory({@required this.memory, @required this.idex});
+  final int index;
+  ItemMemory({@required this.index});
 
   @override
   Widget build(BuildContext context) {
@@ -26,22 +28,22 @@ class ItemMemory extends StatelessWidget{
               children: [
                 Container(
                   padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
-                  child: Image.asset('assert/doc.png', height: 120, width: 50,),
+                  child: Image.asset('assert/doc.png', height: 120, width: 50),
                 ),
                 Container(
                   padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
                   child: Row(
                     children: [
                       Container(
-                        child: memory.image
+                        child: Image.file(File(Application.listMemory.memoryList[index].imagePath),width: 20,height: 20)
                       ),
                       Column(
                         children: [
                           Text(
-                            memory.date, style: TextStyle( fontSize: 20, color: Colors.pink),
+                            Application.listMemory.memoryList[index].date, style: TextStyle( fontSize: 20, color: Colors.pink),
                           ),
                           Text(
-                            memory.content, style: TextStyle( fontSize: 20, color: Colors.pink),
+                            Application.listMemory.memoryList[index].content, style: TextStyle( fontSize: 20, color: Colors.pink),
                           ),
                         ],
                       )
@@ -54,5 +56,4 @@ class ItemMemory extends StatelessWidget{
         )
     );
   }
-
 }
