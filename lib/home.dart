@@ -22,13 +22,14 @@ class _Home extends State<Home> {
   int month;
   int week, year;
 
-  pickImage( ImageSource source ){
+  pickImage(ImageSource source) {
     setState(() {
       // ignore: deprecated_member_use
       imageFile = ImagePicker.pickImage(source: source);
     });
   }
-  pickImage2( ImageSource source ){
+
+  pickImage2(ImageSource source) {
     setState(() {
       // ignore: deprecated_member_use
       imageFile2 = ImagePicker.pickImage(source: source);
@@ -57,6 +58,7 @@ class _Home extends State<Home> {
       },
     );
   }
+
   Widget showImage2() {
     return FutureBuilder<File>(
       future: imageFile2,
@@ -83,12 +85,13 @@ class _Home extends State<Home> {
   @override
   void initState() {
     timeStart = DateTime.now();
-    week = 0; month = 0; year = 0;
-    days = (-1*(DateTime.now()).difference(timeStart).inDays).toInt();
-    if( days < 7 ) day = days;
-    else if( days >= 7  ) week = (days/7) as int;
-    else if( days >= 4*7 ) month = (week/4) as int;
-    else if( days >= 12*4*7 ) year = (month/12) as int;
+    day = 1;
+    week = 0;
+    month = 0;
+    year = 0;
+    days = ((DateTime.now())
+        .difference(timeStart)
+        .inDays + 1 ).toInt();
     super.initState();
   }
 
@@ -115,13 +118,14 @@ class _Home extends State<Home> {
                     color: Colors.grey,)),
                 ),
                 GestureDetector(
-                  onTap: (){
-                    _showDialog();
-                  }, child: Stack(
+                    onTap: () {
+                      _showDialog();
+                    }, child: Stack(
                   children: [
                     Container(
                       child: Center(
-                        child: Image.asset('assert/ttdo.png', height: 320,width: 360,),
+                        child: Image.asset(
+                          'assert/ttdo.png', height: 320, width: 360,),
                       ),
                     ),
                     Column(
@@ -136,8 +140,9 @@ class _Home extends State<Home> {
                           padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
                           child: Center(
                             child: Text(
-                              (days).toString(), style: TextStyle(decoration: TextDecoration
-                                .none, color: Colors.white, fontSize: 90),
+                              (days).toString(), style: TextStyle(
+                                decoration: TextDecoration
+                                    .none, color: Colors.white, fontSize: 90),
                             ),
                           ),
                         ),
@@ -153,25 +158,25 @@ class _Home extends State<Home> {
                     Column(
                       children: [
                         Container(
-                          padding: EdgeInsets.fromLTRB(20, 40, 0, 0),
-                          child: GestureDetector(
-                            child: CircularProfileAvatar(
-                              '',
-                              child: showImage(),
-                              borderColor: Colors.white,
-                              borderWidth: 3,
-                              radius: 50,
-                            ),
-                            onTap: (){
-                              pickImage(ImageSource.gallery);
-                            },
-                          )
+                            padding: EdgeInsets.fromLTRB(20, 40, 0, 0),
+                            child: GestureDetector(
+                              child: CircularProfileAvatar(
+                                '',
+                                child: showImage(),
+                                borderColor: Colors.white,
+                                borderWidth: 3,
+                                radius: 50,
+                              ),
+                              onTap: () {
+                                pickImage(ImageSource.gallery);
+                              },
+                            )
                         ),
                         Container(
                           padding: EdgeInsets.fromLTRB(20, 10, 0, 0),
                           child: GestureDetector(
                             child: changeName1(),
-                            onTap:(){
+                            onTap: () {
                               _dialogHoVaTen1();
                             },
                           ),
@@ -188,28 +193,28 @@ class _Home extends State<Home> {
                     Column(
                       children: [
                         Container(
-                          padding: EdgeInsets.fromLTRB(40, 40, 0, 0),
-                          child: GestureDetector(
-                            child: CircularProfileAvatar(
-                              '',
-                              child: showImage2(),
-                              borderColor: Colors.white,
-                              borderWidth: 3,
-                              radius: 50,
-                            ),
-                            onTap: (){
-                              pickImage2(ImageSource.gallery);
-                            },
-                          )
+                            padding: EdgeInsets.fromLTRB(40, 40, 0, 0),
+                            child: GestureDetector(
+                              child: CircularProfileAvatar(
+                                '',
+                                child: showImage2(),
+                                borderColor: Colors.white,
+                                borderWidth: 3,
+                                radius: 50,
+                              ),
+                              onTap: () {
+                                pickImage2(ImageSource.gallery);
+                              },
+                            )
                         ),
                         Container(
-                          padding: EdgeInsets.fromLTRB(50, 10, 0, 0),
-                          child: GestureDetector(
-                            child: changeName2(),
-                            onTap:(){
-                              _dialogHoVaTen2();
-                            },
-                          )
+                            padding: EdgeInsets.fromLTRB(50, 10, 0, 0),
+                            child: GestureDetector(
+                              child: changeName2(),
+                              onTap: () {
+                                _dialogHoVaTen2();
+                              },
+                            )
                         )
                       ],
                     )
@@ -345,7 +350,10 @@ class _Home extends State<Home> {
                             Container(
                               padding: EdgeInsets.fromLTRB(20, 105, 0, 0),
                               child: Text(
-                                DateTime.now().hour.toString(), style: TextStyle(fontSize: 30,
+                                DateTime
+                                    .now()
+                                    .hour
+                                    .toString(), style: TextStyle(fontSize: 30,
                                   color: Colors.white,
                                   decoration: TextDecoration.none),
                               ),
@@ -374,7 +382,10 @@ class _Home extends State<Home> {
                             Container(
                               padding: EdgeInsets.fromLTRB(20, 105, 0, 0),
                               child: Text(
-                                DateTime.now().minute.toString(), style: TextStyle(fontSize: 30,
+                                DateTime
+                                    .now()
+                                    .minute
+                                    .toString(), style: TextStyle(fontSize: 30,
                                   color: Colors.white,
                                   decoration: TextDecoration.none),
                               ),
@@ -401,11 +412,12 @@ class _Home extends State<Home> {
                         'assert/traitim.png', height: 50, width: 50,),
                     ),
                     Center(
-                        child: Text(
-                          "${timeStart.day}/${timeStart.month}/${timeStart.year}", style: TextStyle(color: Colors.white,
+                      child: Text(
+                        "${timeStart.day}/${timeStart.month}/${timeStart.year}",
+                        style: TextStyle(color: Colors.white,
                             fontSize: 20,
                             decoration: TextDecoration.none),
-                        ),
+                      ),
                     ),
                     Container(
                       padding: EdgeInsets.fromLTRB(50, 10, 0, 5),
@@ -414,76 +426,87 @@ class _Home extends State<Home> {
                     ),
                   ],
                 )
-                ],
+              ],
             )
         )
     );
   }
 
-  _showDialog() async{
+  _showDialog() async {
     await showDialog(context: context,
-    child: new AlertDialog(
-      contentPadding: const EdgeInsets.all(16.0),
-      content:  Container(
-       // height: 200,
-        child: Column(
-          children: [
-            GestureDetector(
-              child: Text(
-                "Thay đổi dòng trên", style: TextStyle( fontSize: 20, color: Colors.pink, decoration: TextDecoration.none),
+      child: new AlertDialog(
+        contentPadding: const EdgeInsets.all(16.0),
+        content: Container(
+          // height: 200,
+          child: Column(
+            children: [
+              GestureDetector(
+                child: Text(
+                  "Thay đổi dòng trên", style: TextStyle(fontSize: 20,
+                    color: Colors.pink,
+                    decoration: TextDecoration.none),
+                ),
+                onTap: () {
+                  Navigator.of(context, rootNavigator: true).pop("");
+                  _dialogDongTren();
+                },
               ),
-              onTap: (){
-                Navigator.of(context, rootNavigator: true).pop("");
-                _dialogDongTren();
-              },
-            ),
-            Divider(),
-            GestureDetector(
-              child: Text(
-                "Thay đổi dòng dưới", style: TextStyle( fontSize: 20, color: Colors.pink, decoration: TextDecoration.none),
-              ),
-              onTap: (){
-                Navigator.of(context,rootNavigator: true).pop("");
-                _dialogDongDuoi();
-              }
+              Divider(),
+              GestureDetector(
+                  child: Text(
+                    "Thay đổi dòng dưới", style: TextStyle(fontSize: 20,
+                      color: Colors.pink,
+                      decoration: TextDecoration.none),
+                  ),
+                  onTap: () {
+                    Navigator.of(context, rootNavigator: true).pop("");
+                    _dialogDongDuoi();
+                  }
 
-            ),
-            Divider(),
-            GestureDetector(
-              child: Text(
-                "Thay đổi thời gian bắt đầu", style: TextStyle( fontSize: 20, color: Colors.pink, decoration: TextDecoration.none),
               ),
-              onTap: (){
-                Navigator.of(context, rootNavigator: true).pop("");
-                chooseTime();
-              },
-            ),
-            Divider(),
-            Text(
-              "Thay đổi hình nền", style: TextStyle( fontSize: 20, color: Colors.pink,  decoration: TextDecoration.none),
-            ),
-          ],
+              Divider(),
+              GestureDetector(
+                child: Text(
+                  "Thay đổi thời gian bắt đầu", style: TextStyle(fontSize: 20,
+                    color: Colors.pink,
+                    decoration: TextDecoration.none),
+                ),
+                onTap: () {
+                  Navigator.of(context, rootNavigator: true).pop("");
+                  chooseTime();
+                },
+              ),
+              Divider(),
+              Text(
+                "Thay đổi hình nền", style: TextStyle(fontSize: 20,
+                  color: Colors.pink,
+                  decoration: TextDecoration.none),
+              ),
+            ],
+          ),
         ),
-      ),
-      actions: [
-        new FlatButton(
-            onPressed: (){
+        actions: [
+          new FlatButton(
+              onPressed: () {
+                setState(() {
+                  Navigator.of(context, rootNavigator: true).pop("dialog");
+                });
+              },
+              child: Text(
+                "Cancel",
+                style: TextStyle(fontSize: 20, decoration: TextDecoration.none),
+              )),
+          new FlatButton(
+            onPressed: () {
               setState(() {
                 Navigator.of(context, rootNavigator: true).pop("dialog");
               });
             },
             child: Text(
-              "Cancel", style: TextStyle( fontSize: 20, decoration: TextDecoration.none),
-            )),
-        new FlatButton(
-          onPressed: (){
-            setState(() {
-              Navigator.of(context, rootNavigator: true).pop("dialog");
-            });
-          },
-          child: Text(
-              "OK", style: TextStyle( fontSize: 20, decoration: TextDecoration.none)),
-        )],
+                "OK", style: TextStyle(
+                fontSize: 20, decoration: TextDecoration.none)),
+          )
+        ],
       ),
 
     );
@@ -500,9 +523,9 @@ class _Home extends State<Home> {
               autofocus: true,
               controller: _textEditingController,
               decoration: new InputDecoration(
-                  labelText: 'Nhap dong tren',
+                labelText: 'Nhap dong tren',
               ),
-              onChanged: (value){
+              onChanged: (value) {
                 setState(() {
                   dongTren = value;
                 });
@@ -513,14 +536,14 @@ class _Home extends State<Home> {
         ),
         actions: [
           new FlatButton(
-              onPressed: (){
+              onPressed: () {
                 setState(() {
                   Navigator.of(context, rootNavigator: true).pop('dialog');
                 });
               },
               child: const Text('Cancel')),
           new FlatButton(
-              onPressed: (){
+              onPressed: () {
                 setState(() {
                   Navigator.of(context, rootNavigator: true).pop('dialog');
                   _textEditingController.text = '';
@@ -545,7 +568,7 @@ class _Home extends State<Home> {
               decoration: new InputDecoration(
                 labelText: 'Nhap dong duoi',
               ),
-              onChanged: (value){
+              onChanged: (value) {
                 setState(() {
                   dongDuoi = value;
                 });
@@ -556,14 +579,14 @@ class _Home extends State<Home> {
         ),
         actions: [
           new FlatButton(
-              onPressed: (){
+              onPressed: () {
                 setState(() {
                   Navigator.of(context, rootNavigator: true).pop('dialog');
                 });
               },
               child: const Text('Cancel')),
           new FlatButton(
-              onPressed: (){
+              onPressed: () {
                 setState(() {
                   Navigator.of(context, rootNavigator: true).pop('dialog');
                   _textEditingController.text = '';
@@ -588,7 +611,7 @@ class _Home extends State<Home> {
               decoration: new InputDecoration(
                   labelText: 'Nhap ten', hintText: 'Nhap ten cua ban'
               ),
-              onChanged: (value){
+              onChanged: (value) {
                 setState(() {
                   hoTen2 = value;
                 });
@@ -599,14 +622,14 @@ class _Home extends State<Home> {
         ),
         actions: [
           new FlatButton(
-              onPressed: (){
+              onPressed: () {
                 setState(() {
                   Navigator.of(context, rootNavigator: true).pop('dialog');
                 });
               },
               child: const Text('Cancel')),
           new FlatButton(
-              onPressed: (){
+              onPressed: () {
                 setState(() {
                   Navigator.of(context, rootNavigator: true).pop('dialog');
                   _textEditingController.text = '';
@@ -630,7 +653,7 @@ class _Home extends State<Home> {
               decoration: new InputDecoration(
                   labelText: 'Nhap ten', hintText: 'Nhap ten cua ban'
               ),
-              onChanged: (value){
+              onChanged: (value) {
                 setState(() {
                   hoTen1 = value;
                 });
@@ -641,14 +664,14 @@ class _Home extends State<Home> {
         ),
         actions: [
           new FlatButton(
-              onPressed: (){
+              onPressed: () {
                 setState(() {
                   Navigator.of(context, rootNavigator: true).pop('dialog');
                 });
               },
               child: const Text('Cancel')),
           new FlatButton(
-              onPressed: (){
+              onPressed: () {
                 setState(() {
                   Navigator.of(context, rootNavigator: true).pop('dialog');
                   _textEditingController.text = '';
@@ -661,78 +684,79 @@ class _Home extends State<Home> {
   }
 
 
-  Widget changeName2(){
-    if( hoTen2 == null ){
-      return Text("Ho va ten",style: TextStyle(decoration: TextDecoration.none,
+  Widget changeName2() {
+    if (hoTen2 == null) {
+      return Text("Ho va ten", style: TextStyle(decoration: TextDecoration.none,
           fontSize: 15,
           color: Colors.white),);
     }
     else {
-      return Text(hoTen2.toString(), style: TextStyle(decoration: TextDecoration.none,
+      return Text(
+        hoTen2.toString(), style: TextStyle(decoration: TextDecoration.none,
           fontSize: 15,
           color: Colors.white),);
     }
   }
 
-  Widget changeName1(){
-    if( hoTen1 == null ){
-      return Text("Ho va ten",style: TextStyle(decoration: TextDecoration.none,
+  Widget changeName1() {
+    if (hoTen1 == null) {
+      return Text("Ho va ten", style: TextStyle(decoration: TextDecoration.none,
           fontSize: 15,
           color: Colors.white),);
     }
     else {
-      return Text(hoTen1.toString(), style: TextStyle(decoration: TextDecoration.none,
+      return Text(
+        hoTen1.toString(), style: TextStyle(decoration: TextDecoration.none,
           fontSize: 15,
           color: Colors.white),);
     }
   }
 
-  Widget changeDongTren(){
-    if( dongTren == null ){
+  Widget changeDongTren() {
+    if (dongTren == null) {
       return Text(
-          "Been Together", style:TextStyle( decoration: TextDecoration
+          "Been Together", style: TextStyle(decoration: TextDecoration
           .none, color: Colors.white, fontSize: 20)
       );
     }
-    else{
+    else {
       return Text(
-          dongTren.toString(), style:TextStyle( decoration: TextDecoration
-          .none, color: Colors.white, fontSize: 20)
-      );
-    }
-  }
-
-  Widget changeDongDuoi(){
-    if( dongDuoi == null ){
-      return Text(
-          "Days", style:TextStyle( decoration: TextDecoration
-          .none, color: Colors.white, fontSize: 20)
-      );
-    }
-    else{
-      return Text(
-          dongDuoi.toString(), style:TextStyle( decoration: TextDecoration
+          dongTren.toString(), style: TextStyle(decoration: TextDecoration
           .none, color: Colors.white, fontSize: 20)
       );
     }
   }
 
-  void chooseTime() async{
+  Widget changeDongDuoi() {
+    if (dongDuoi == null) {
+      return Text(
+          "Days", style: TextStyle(decoration: TextDecoration
+          .none, color: Colors.white, fontSize: 20)
+      );
+    }
+    else {
+      return Text(
+          dongDuoi.toString(), style: TextStyle(decoration: TextDecoration
+          .none, color: Colors.white, fontSize: 20)
+      );
+    }
+  }
+
+  void chooseTime() async {
     DateTime time = await showDatePicker(initialDate: timeStart, context: context,
-    firstDate: DateTime(DateTime.now().year-5), lastDate: DateTime(DateTime.now().year+5), );
+      firstDate: DateTime(DateTime.now().year-5), lastDate: DateTime(DateTime.now().year+5), );
     if( timeStart != null ){
       setState(() {
         timeStart = time;
-        days = (-1*(DateTime.now()).difference(timeStart).inDays + 2).toInt();
-        if( days < 7 ) day = days;
-        else if( days > 7  ) week = (days/7) as int;
-        else if( days >= 4*7 ) month = (week/4) as int;
-        else if( days >= 12*4*7 ) year = (month/12) as int;
+        days = (((DateTime.now()).difference(timeStart).inDays + 1).toInt());
+        int cur_day = days;
+        year = (cur_day/365).floor();
+        cur_day = cur_day - 365*year;
+        month = (cur_day/30).floor();
+        cur_day = cur_day - month*30;
+        week = (cur_day/7).floor();
+        day = cur_day - week * 7;
       });
     }
   }
 }
-
-
-
-

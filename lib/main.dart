@@ -2,6 +2,8 @@ import 'dart:convert';
 
 import 'package:beentogether/app/add_image/image_provider.dart';
 import 'package:beentogether/app/home2/home2.dart';
+import 'package:beentogether/Home0.dart';
+import 'package:beentogether/hom3_mat_khau.dart';
 import 'package:beentogether/home4_chat.dart';
 import 'package:beentogether/model/memory.dart';
 import 'package:beentogether/todo_memory.dart';
@@ -37,7 +39,7 @@ class MyApp extends StatelessWidget {
     Application.listMemory.memoryList = [];
     print(json.decode(Application.sharedPreferences.getString("key")));
      Application.listMemory = ListMemory.fromJson(json.decode(Application.sharedPreferences.getString("key")));
-    return MaterialApp(debugShowCheckedModeBanner: false, home: ViewPage());
+    return MaterialApp(debugShowCheckedModeBanner: false, home: Home0());
   }
 }
 
