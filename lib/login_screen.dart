@@ -1,5 +1,6 @@
 
 import 'dart:ui';
+import 'package:beentogether/register_screen.dart';
 import 'package:beentogether/view_pager.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -103,7 +104,12 @@ class _Home0 extends State<Home0>{
                         shape: BoxShape.rectangle,
                         borderRadius: BorderRadius.all(Radius.circular(15),), border: Border.all(color: Colors.blueAccent, width: 2)
                     ),
-                    child: Text("Use Facebook", style: TextStyle( fontSize: 17, color: Colors.black, fontWeight: FontWeight.bold), )
+                    child: Row(
+                      children: [
+                        Image.asset("assert/facebook.png",  height: 40, width: 40,),
+                        Text(" Use Facebook", style: TextStyle( fontSize: 15, color: Colors.black, fontWeight: FontWeight.bold), )
+                      ],
+                    )
                   ),
                 ),
                 FlatButton(
@@ -113,7 +119,12 @@ class _Home0 extends State<Home0>{
                           shape: BoxShape.rectangle,
                           borderRadius: BorderRadius.all(Radius.circular(15),), border: Border.all(color: Colors.pinkAccent, width: 2)
                       ),
-                      child: Text("User Google", style: TextStyle( fontSize: 17, color: Colors.black, fontWeight: FontWeight.bold,))
+                      child: Row(
+                        children: [
+                          Image.asset("assert/google.png", height: 40, width: 40,),
+                          Text(" User Google", style: TextStyle( fontSize: 15, color: Colors.black, fontWeight: FontWeight.bold,))
+                        ],
+                      )
                   ),
                 ),
               ],
@@ -121,8 +132,11 @@ class _Home0 extends State<Home0>{
             Padding(
               padding: const EdgeInsets.only(top: 30),
               child: Center(
-                child: Text(
-                  "New Account", style: TextStyle( fontSize: 17, fontWeight: FontWeight.bold, color: Colors.pinkAccent),
+                child: GestureDetector(
+                  onTap:() =>  Navigator.push(context, MaterialPageRoute (builder: (context) => Register())),
+                  child: Text(
+                    "New Account", style: TextStyle( fontSize: 17, fontWeight: FontWeight.bold, color: Colors.pinkAccent),
+                  ),
                 ),
               ),
             )
@@ -131,5 +145,4 @@ class _Home0 extends State<Home0>{
       ),
     );
   }
-
 }

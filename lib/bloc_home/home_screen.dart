@@ -1,14 +1,16 @@
 import 'dart:io';
+import 'package:beentogether/bloc_home/home.cubit.dart';
 import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 
-class Home extends StatefulWidget{
+class HomeScreen extends StatefulWidget{
   @override
   _Home createState() => _Home();
 
 }
-class _Home extends State<Home> {
+class _Home extends State<HomeScreen> {
   Future<File>imageFile;
   Future<File>imageFile2;
   String hoTen1;
@@ -601,43 +603,45 @@ class _Home extends State<Home> {
   _dialogHoVaTen2() async {
     await showDialog<String>(
       context: context,
-      child: new AlertDialog(
-        contentPadding: const EdgeInsets.all(16.0),
-        content: new Row(
-          children: [
-            new Expanded(child: TextField(
-              autofocus: true,
-              controller: _textEditingController,
-              decoration: new InputDecoration(
-                  labelText: 'Nhap ten', hintText: 'Nhap ten cua ban'
-              ),
-              onChanged: (value) {
-                setState(() {
-                  hoTen2 = value;
-                });
-              },
-            )
-            )
+      child: BlocBuilder<HomeCubit, HomeState>( builder: (context, name){
+        return AlertDialog(
+          contentPadding: const EdgeInsets.all(16.0),
+          content: new Row(
+            children: [
+              new Expanded(child: TextField(
+                autofocus: true,
+                controller: _textEditingController,
+                decoration: new InputDecoration(
+                    labelText: 'Nhap ten', hintText: 'Nhap ten cua ban'
+                ),
+                onChanged: (value) {
+                  setState(() {
+                    _homeCubit.name = value;
+                  });
+                },
+              )
+              )
+            ],
+          ),
+          actions: [
+            new FlatButton(
+                onPressed: () {
+                  setState(() {
+                    Navigator.of(context, rootNavigator: true).pop('dialog');
+                  });
+                },
+                child: const Text('Cancel')),
+            new FlatButton(
+                onPressed: () {
+                  setState(() {
+                    Navigator.of(context, rootNavigator: true).pop('dialog');
+                    _textEditingController.text = '';
+                  });
+                },
+                child: const Text('Ok'))
           ],
-        ),
-        actions: [
-          new FlatButton(
-              onPressed: () {
-                setState(() {
-                  Navigator.of(context, rootNavigator: true).pop('dialog');
-                });
-              },
-              child: const Text('Cancel')),
-          new FlatButton(
-              onPressed: () {
-                setState(() {
-                  Navigator.of(context, rootNavigator: true).pop('dialog');
-                  _textEditingController.text = '';
-                });
-              },
-              child: const Text('Ok'))
-        ],
-      ),
+        );
+      }),
     );
   }
 
@@ -682,8 +686,8 @@ class _Home extends State<Home> {
       ),
     );
   }
-
-
+  
+  HomeCubit _homeCubit = HomeCubit();
   Widget changeName2() {
     if (hoTen2 == null) {
       return Text("Ho va ten", style: TextStyle(decoration: TextDecoration.none,
@@ -691,10 +695,16 @@ class _Home extends State<Home> {
           color: Colors.white),);
     }
     else {
-      return Text(
-        hoTen2.toString(), style: TextStyle(decoration: TextDecoration.none,
-          fontSize: 15,
-          color: Colors.white),);
+      return BlocBuilder<HomeCubit, HomeState>(
+        cubit: _homeCubit,
+        builder: (context, state){
+          return Text(
+            '${_homeCubit.name}', style: TextStyle(decoration: TextDecoration.none,
+              fontSize: 15,
+              color: Colors.white),);
+        },
+
+      );
     }
   }
 

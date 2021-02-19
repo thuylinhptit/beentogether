@@ -10,6 +10,7 @@ class AddImage extends StatefulWidget{
 
 }
 class _AddImage extends State<AddImage>{
+
   Future<File>imageFile;
 
   pickImage( ImageSource source ){

@@ -27,6 +27,9 @@ dependencies:
   intl: ^0.16.1
   image_picker: ^0.6.7+22
   circular_profile_avatar: ^1.0.6
+  group_radio_button: ^1.0.1
+  flutter_bloc: ^6.1.2
+  equatable: ^1.2.6
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -59,6 +62,9 @@ flutter:
      - assert/chibi2.png
      - assert/love.png
      - assert/love1.png
+     - assert/love2.png
+     - assert/google.png
+     - assert/facebook.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

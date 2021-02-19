@@ -1,7 +1,7 @@
-import 'package:beentogether/Home0.dart';
-import 'package:beentogether/home.dart';
-import 'package:beentogether/home2.dart';
-import 'package:beentogether/home4_chat.dart';
+
+import 'package:beentogether/bloc_home/home_screen.dart';
+import 'package:beentogether/memory_screen.dart';
+import 'package:beentogether/chat_screen.dart';
 import 'package:flutter/material.dart';
 
 class ViewPage extends StatefulWidget{
@@ -18,7 +18,7 @@ class _ViewPage extends State<ViewPage>{
       scrollDirection: Axis.horizontal,
       controller: controller,
       children:[
-        Home(),
+        HomeScreen(),
         Home2(),
         Home4(),
       ],
