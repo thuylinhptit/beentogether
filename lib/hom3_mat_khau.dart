@@ -1,6 +1,7 @@
 
 import 'dart:io';
 
+import 'package:beentogether/add_image.dart';
 import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

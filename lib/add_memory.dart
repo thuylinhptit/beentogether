@@ -1,16 +1,12 @@
 
-import 'dart:convert';
-
-import 'package:beentogether/app/add_image/add_image.dart';
-import 'package:beentogether/app/add_image/image_provider.dart';
-import 'package:beentogether/model/memory.dart';
+import 'package:beentogether/add_image.dart';
+import 'package:beentogether/memory.dart';
 import 'package:beentogether/todo_memory.dart';
-import 'package:beentogether/ultis/Application.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 class AddMemory extends StatefulWidget{
-  final Memory memory;
-  final int index;
+  Memory memory;
+  int index;
   AddMemory({this.memory, this.index});
   @override
   _AddMemory createState() => _AddMemory();
@@ -47,7 +43,7 @@ class _AddMemory extends State<AddMemory>{
             padding: const EdgeInsets.symmetric(vertical: 20),
             child: ListTile(
               title: Text(
-                "Chon Ngay:", style: TextStyle(fontSize: 20, color: Colors.black87),
+                "Chon Ngay:", style: TextStyle(fontSize: 20, color: Colors.black87, ),
               ),
               subtitle: Text(
                 '${dateTime.day}/${dateTime.month}/${dateTime.year}', style: TextStyle( fontSize: 15, color: Colors.black87),
@@ -72,9 +68,10 @@ class _AddMemory extends State<AddMemory>{
           Padding(
             padding: EdgeInsets.fromLTRB(30, 10, 0, 0),
             child: RaisedButton(
-              onPressed: () => _save(),
+              onPressed: Save,
               child: Text(
-                "Luu", style: TextStyle( fontSize: 20),
+                "Luu", style: TextStyle( fontSize: 20, ),
+
               ),
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
               color: Colors.pinkAccent,
@@ -92,17 +89,18 @@ class _AddMemory extends State<AddMemory>{
       });
     }
   }
-  void _save(){
-    Provider.of<AddImageState>(context,listen: false).changeImageState(false);
+  void Save(){
     final String content = contentController.text;
-    Provider.of<TodoMemory>(context, listen: false).listIsEmptyState(false);
+    var memoryProvider = Provider.of<TodoMemory>(context, listen: false);
     if( content.isNotEmpty ){
+      Memory memory = Memory(date: '${dateTime.day}/${dateTime.month}/${dateTime.year}', content: content);
+      memoryProvider.addMemory(memory);
+      List<Memory> listMemory = new List();
+      listMemory.add(memory);
+      memoryProvider.update();
       Navigator.pop(context);
-      Memory memory = Memory(date: '${dateTime.day}/${dateTime.month}/${dateTime.year}',
-          content: content,imagePath: Application.sharedPreferences.getString("path"));
-      Application.listMemory.memoryList.add(memory);
-      Application.sharedPreferences.putString("key", json.encode(Application.listMemory));
-      print("Application: ${json.decode(Application.sharedPreferences.getString("key"))}");
+      print('Done');
     }
   }
 }
+
