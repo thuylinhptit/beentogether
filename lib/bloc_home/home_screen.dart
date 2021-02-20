@@ -13,16 +13,12 @@ class HomeScreen extends StatefulWidget{
 class _Home extends State<HomeScreen> {
   Future<File>imageFile;
   Future<File>imageFile2;
-  String hoTen1;
-  String hoTen2;
-  String dongTren;
-  String dongDuoi;
-  DateTime timeStart;
   TextEditingController _textEditingController = TextEditingController();
   int day;
   int days;
   int month;
   int week, year;
+  DateTime timeStart;
 
   pickImage(ImageSource source) {
     setState(() {
@@ -517,93 +513,93 @@ class _Home extends State<HomeScreen> {
   _dialogDongTren() async {
     await showDialog<String>(
       context: context,
-      child: new AlertDialog(
-        contentPadding: const EdgeInsets.all(16.0),
-        content: new Row(
-          children: [
-            new Expanded(child: TextField(
-              autofocus: true,
-              controller: _textEditingController,
-              decoration: new InputDecoration(
-                labelText: 'Nhap dong tren',
-              ),
-              onChanged: (value) {
-                setState(() {
-                  dongTren = value;
-                });
-              },
-            )
-            )
+      child: BlocBuilder<HomeCubit, HomeState> (builder: (context, state) {
+        return new AlertDialog(
+          contentPadding: const EdgeInsets.all(16.0),
+          content: new Row(
+            children: [
+              new Expanded(child: TextField(
+                autofocus: true,
+                controller: _textEditingController,
+                decoration: new InputDecoration(
+                  labelText: 'Nhap dong tren',
+                ),
+                onChanged: (value) {
+                  _homeCubit.setTextDongTren(value);
+                },
+              )
+              )
+            ],
+          ),
+          actions: [
+            new FlatButton(
+                onPressed: () {
+                  setState(() {
+                    Navigator.of(context, rootNavigator: true).pop('dialog');
+                  });
+                },
+                child: const Text('Cancel')),
+            new FlatButton(
+                onPressed: () {
+                  setState(() {
+                    Navigator.of(context, rootNavigator: true).pop('dialog');
+                    _textEditingController.text = '';
+                  });
+                },
+                child: const Text('Ok'))
           ],
-        ),
-        actions: [
-          new FlatButton(
-              onPressed: () {
-                setState(() {
-                  Navigator.of(context, rootNavigator: true).pop('dialog');
-                });
-              },
-              child: const Text('Cancel')),
-          new FlatButton(
-              onPressed: () {
-                setState(() {
-                  Navigator.of(context, rootNavigator: true).pop('dialog');
-                  _textEditingController.text = '';
-                });
-              },
-              child: const Text('Ok'))
-        ],
-      ),
+        );
+      }),
     );
   }
 
   _dialogDongDuoi() async {
     await showDialog<String>(
       context: context,
-      child: new AlertDialog(
-        contentPadding: const EdgeInsets.all(16.0),
-        content: new Row(
-          children: [
-            new Expanded(child: TextField(
-              autofocus: true,
-              controller: _textEditingController,
-              decoration: new InputDecoration(
-                labelText: 'Nhap dong duoi',
-              ),
-              onChanged: (value) {
-                setState(() {
-                  dongDuoi = value;
-                });
-              },
-            )
-            )
+      child: BlocBuilder<HomeCubit, HomeState>(builder: (context, state){
+        return new AlertDialog(
+          contentPadding: const EdgeInsets.all(16.0),
+          content: new Row(
+            children: [
+              new Expanded(child: TextField(
+                autofocus: true,
+                controller: _textEditingController,
+                decoration: new InputDecoration(
+                  labelText: 'Nhap dong duoi',
+                ),
+                onChanged: (value) {
+                  _homeCubit.setTextDongDuoi(value);
+                },
+              )
+              )
+            ],
+          ),
+          actions: [
+            new FlatButton(
+                onPressed: () {
+                  setState(() {
+                    Navigator.of(context, rootNavigator: true).pop('dialog');
+                  });
+                },
+                child: const Text('Cancel')),
+            new FlatButton(
+                onPressed: () {
+                  setState(() {
+                    Navigator.of(context, rootNavigator: true).pop('dialog');
+                    _textEditingController.text = '';
+                  });
+                },
+                child: const Text('Ok'))
           ],
-        ),
-        actions: [
-          new FlatButton(
-              onPressed: () {
-                setState(() {
-                  Navigator.of(context, rootNavigator: true).pop('dialog');
-                });
-              },
-              child: const Text('Cancel')),
-          new FlatButton(
-              onPressed: () {
-                setState(() {
-                  Navigator.of(context, rootNavigator: true).pop('dialog');
-                  _textEditingController.text = '';
-                });
-              },
-              child: const Text('Ok'))
-        ],
-      ),
+        );
+      }),
     );
   }
 
   _dialogHoVaTen2() async {
     await showDialog<String>(
       context: context,
-      child: BlocBuilder<HomeCubit, HomeState>( builder: (context, name){
+      child: BlocBuilder<HomeCubit, HomeState>( builder: (context, state){
         return AlertDialog(
           contentPadding: const EdgeInsets.all(16.0),
           content: new Row(
@@ -615,9 +611,7 @@ class _Home extends State<HomeScreen> {
                     labelText: 'Nhap ten', hintText: 'Nhap ten cua ban'
                 ),
                 onChanged: (value) {
-                  setState(() {
-                    _homeCubit.name = value;
-                  });
+                  _homeCubit.setName2(value);
                 },
               )
               )
@@ -648,48 +642,48 @@ class _Home extends State<HomeScreen> {
   _dialogHoVaTen1() async {
     await showDialog<String>(
       context: context,
-      child: new AlertDialog(
-        contentPadding: const EdgeInsets.all(16.0),
-        content: new Row(
-          children: [
-            new Expanded(child: TextField(
-              controller: _textEditingController,
-              decoration: new InputDecoration(
-                  labelText: 'Nhap ten', hintText: 'Nhap ten cua ban'
-              ),
-              onChanged: (value) {
-                setState(() {
-                  hoTen1 = value;
-                });
-              },
-            )
-            )
+      child: BlocBuilder<HomeCubit, HomeState>( builder: (context, state){
+        return new AlertDialog(
+          contentPadding: const EdgeInsets.all(16.0),
+          content: new Row(
+            children: [
+              new Expanded(child: TextField(
+                controller: _textEditingController,
+                decoration: new InputDecoration(
+                    labelText: 'Nhap ten', hintText: 'Nhap ten cua ban'
+                ),
+                onChanged: (value) {
+                  _homeCubit.setName1(value);
+                },
+              )
+              )
+            ],
+          ),
+          actions: [
+            new FlatButton(
+                onPressed: () {
+                  setState(() {
+                    Navigator.of(context, rootNavigator: true).pop('dialog');
+                  });
+                },
+                child: const Text('Cancel')),
+            new FlatButton(
+                onPressed: () {
+                  setState(() {
+                    Navigator.of(context, rootNavigator: true).pop('dialog');
+                    _textEditingController.text = '';
+                  });
+                },
+                child: const Text('Ok'))
           ],
-        ),
-        actions: [
-          new FlatButton(
-              onPressed: () {
-                setState(() {
-                  Navigator.of(context, rootNavigator: true).pop('dialog');
-                });
-              },
-              child: const Text('Cancel')),
-          new FlatButton(
-              onPressed: () {
-                setState(() {
-                  Navigator.of(context, rootNavigator: true).pop('dialog');
-                  _textEditingController.text = '';
-                });
-              },
-              child: const Text('Ok'))
-        ],
-      ),
+        );
+      }),
     );
   }
   
   HomeCubit _homeCubit = HomeCubit();
   Widget changeName2() {
-    if (hoTen2 == null) {
+    if (_homeCubit.name2 == null) {
       return Text("Ho va ten", style: TextStyle(decoration: TextDecoration.none,
           fontSize: 15,
           color: Colors.white),);
@@ -699,7 +693,7 @@ class _Home extends State<HomeScreen> {
         cubit: _homeCubit,
         builder: (context, state){
           return Text(
-            '${_homeCubit.name}', style: TextStyle(decoration: TextDecoration.none,
+            '${_homeCubit.name2}', style: TextStyle(decoration: TextDecoration.none,
               fontSize: 15,
               color: Colors.white),);
         },
@@ -709,21 +703,21 @@ class _Home extends State<HomeScreen> {
   }
 
   Widget changeName1() {
-    if (hoTen1 == null) {
+    if (_homeCubit.name1 == null) {
       return Text("Ho va ten", style: TextStyle(decoration: TextDecoration.none,
           fontSize: 15,
           color: Colors.white),);
     }
     else {
       return Text(
-        hoTen1.toString(), style: TextStyle(decoration: TextDecoration.none,
+        _homeCubit.name1, style: TextStyle(decoration: TextDecoration.none,
           fontSize: 15,
           color: Colors.white),);
     }
   }
 
   Widget changeDongTren() {
-    if (dongTren == null) {
+    if (_homeCubit.textDongTren == null) {
       return Text(
           "Been Together", style: TextStyle(decoration: TextDecoration
           .none, color: Colors.white, fontSize: 20)
@@ -731,14 +725,14 @@ class _Home extends State<HomeScreen> {
     }
     else {
       return Text(
-          dongTren.toString(), style: TextStyle(decoration: TextDecoration
+          _homeCubit.textDongTren, style: TextStyle(decoration: TextDecoration
           .none, color: Colors.white, fontSize: 20)
       );
     }
   }
 
   Widget changeDongDuoi() {
-    if (dongDuoi == null) {
+    if (_homeCubit.textDongDuoi == null) {
       return Text(
           "Days", style: TextStyle(decoration: TextDecoration
           .none, color: Colors.white, fontSize: 20)
@@ -746,7 +740,7 @@ class _Home extends State<HomeScreen> {
     }
     else {
       return Text(
-          dongDuoi.toString(), style: TextStyle(decoration: TextDecoration
+          _homeCubit.textDongDuoi, style: TextStyle(decoration: TextDecoration
           .none, color: Colors.white, fontSize: 20)
       );
     }
@@ -756,17 +750,17 @@ class _Home extends State<HomeScreen> {
     DateTime time = await showDatePicker(initialDate: timeStart, context: context,
       firstDate: DateTime(DateTime.now().year-5), lastDate: DateTime(DateTime.now().year+5), );
     if( timeStart != null ){
-      setState(() {
-        timeStart = time;
-        days = (((DateTime.now()).difference(timeStart).inDays + 1).toInt());
-        int cur_day = days;
-        year = (cur_day/365).floor();
-        cur_day = cur_day - 365*year;
-        month = (cur_day/30).floor();
-        cur_day = cur_day - month*30;
-        week = (cur_day/7).floor();
-        day = cur_day - week * 7;
-      });
+        setState(() {
+          days = (((DateTime.now()).difference(time).inDays + 1).toInt());
+          print(days);
+          int cur_day = days;
+          year = (cur_day/365).floor();
+          cur_day = cur_day - 365*year;
+          month = (cur_day/30).floor();
+          cur_day = cur_day - month*30;
+          week = (cur_day/7).floor();
+          day = cur_day - week * 7;
+        });
     }
   }
 }
