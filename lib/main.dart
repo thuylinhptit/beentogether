@@ -1,9 +1,9 @@
 import 'dart:convert';
 
-import 'package:beentogether/app/add_image/image_provider.dart';
-import 'package:beentogether/app/home2/home2.dart';
 import 'package:beentogether/Home0.dart';
-import 'package:beentogether/hom3_mat_khau.dart';
+import 'package:beentogether/app/add_image/image_provider.dart';
+import 'package:beentogether/app/home/home.cubit.dart';
+import 'package:beentogether/app/home2/home2.dart';
 import 'package:beentogether/home4_chat.dart';
 import 'package:beentogether/model/memory.dart';
 import 'package:beentogether/todo_memory.dart';
@@ -11,9 +11,10 @@ import 'package:beentogether/ultis/Application.dart';
 import 'package:beentogether/ultis/shared_pref.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
-import 'home.dart';
+import 'app/home/home.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,7 +25,12 @@ void main() async {
         ChangeNotifierProvider(create: (_) => AddImageState()),
         ChangeNotifierProvider(create: (_) => TodoMemory()),
       ],
-      child: MyApp(),
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider<HomeCubit>(create: (BuildContext context) => HomeCubit())
+        ],
+        child: MyApp(),
+      ),
     ),
   );
 }
@@ -36,9 +42,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Application.listMemory.memoryList = [];
-    print(json.decode(Application.sharedPreferences.getString("key")));
-     Application.listMemory = ListMemory.fromJson(json.decode(Application.sharedPreferences.getString("key")));
+
     return MaterialApp(debugShowCheckedModeBanner: false, home: Home0());
   }
 }
