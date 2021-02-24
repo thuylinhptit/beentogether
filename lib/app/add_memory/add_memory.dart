@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:beentogether/app/add_image/add_image.dart';
 import 'package:beentogether/app/add_image/image_provider.dart';
+import 'package:beentogether/app/home2/home2.cubit.dart';
 import 'package:beentogether/model/memory.dart';
 import 'package:beentogether/todo_memory.dart';
 import 'package:beentogether/ultis/Application.dart';
@@ -102,7 +103,7 @@ class _AddMemory extends State<AddMemory>{
           content: content,imagePath: Application.sharedPreferences.getString("path"));
       Application.listMemory.memoryList.add(memory);
       Application.sharedPreferences.putString("key", json.encode(Application.listMemory));
-      print("Application: ${json.decode(Application.sharedPreferences.getString("key"))}");
+      Home2Cubit().changeStatus();
     }
   }
 }

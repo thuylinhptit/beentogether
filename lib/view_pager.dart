@@ -1,5 +1,5 @@
 import 'package:beentogether/app/home2/home2.dart';
-import 'package:beentogether/home.dart';
+import 'file:///D:/CODE/Flutter/beentogether/lib/app/home/home.dart';
 import 'package:beentogether/home4_chat.dart';
 import 'package:flutter/material.dart';
 
